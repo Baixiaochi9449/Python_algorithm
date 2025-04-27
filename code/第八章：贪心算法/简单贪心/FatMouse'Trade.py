@@ -1,3 +1,4 @@
+#性价比从小到大
 import sys
 
 input = sys.stdin.read().split()

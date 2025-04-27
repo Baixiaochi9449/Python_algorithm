@@ -1,3 +1,4 @@
+#最大的减去最小的
 import sys
 input = sys.stdin.read().split()
 idx=0
