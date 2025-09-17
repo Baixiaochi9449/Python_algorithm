@@ -1,35 +1,41 @@
+//Ã¶¾ÙÒ»¸öÖĞÎ»Êı£¬È»ºóÅĞ¶Ï1000×÷ÎªÖĞÎ»ÊıµÄ»°£¬ÓÒ±ßµÄÖµĞèÒªÔö¼Ó¶àÉÙ
+
 #include <iostream>
 #include <vector>
 #include <algorithm>
 using namespace std;
 
-bool check(long long mid,vector<long long>& nums,long long k){
-  //ä¾æ¬¡æšä¸¾ï¼Œçœ‹çœ‹kå¤Ÿä¸å¤Ÿ
-  long long n=nums.size();
-  long long result=0;
-  for(long long i=n/2;i<n;i++){
-    if(nums[i]<mid) result+=(mid-nums[i]);
-  }
-  if(result<=k) return true;
-  else return false;
+int n,k;
+
+bool check(int mid,vector<int>& arr){
+	int pos=n/2;
+	long long need=0;
+	for(int i=pos;i<n;i++){
+		if(mid>arr[i]){
+			need+=(long long)(mid-arr[i]) ;
+		}
+	}
+	if(need>k) return false;
+	else return true;
 }
 
 int main(){
-  long long n,k;
-  while(cin >> n >> k){
-    vector<long long> nums(n);
-    for(long long i=0;i<n;i++){
-      cin >> nums[i];
-    }
-    sort(nums.begin(),nums.end());
-    
-    long long l=0,r=2e9;
-    while(l<r){
-      long long mid=((r+l+1)/2);
-      if(check(mid,nums,k)) l=mid;           //midæ»¡è¶³è¦æ±‚ï¼Œmidèƒ½æ»¡è¶³ kå¤Ÿï¼Œæ‰€ä»¥midèƒ½æ›´å¤§ï¼Œæ‰€ä»¥å˜å³åŒºé—´
-      else r=mid-1;
-    }
-    cout << l << endl;
-  }
-  return 0;
+	
+	cin >> n >> k;  //nÒ»¶¨ÊÇÆæÊı 
+	vector<int> arr(n);
+	for(int i=0;i<n;i++){
+		cin >> arr[i];
+	} 
+	//ÖĞÎ»Êı±ØĞëÊÇ´ÓĞ¡µ½´óÅÅĞòµÄ
+	sort(arr.begin(),arr.end()); 
+	//¿ªÊ¼Ã¶¾ÙÖĞÎ»Êı
+	long long l=0,r=2*1e9;
+	while(l<r){
+		int mid=(l+r+1)/2;
+		if(check(mid,arr)) l=mid;
+		else r=mid-1;
+	} 
+	
+	cout << l << endl;
+	return 0;
 }
